@@ -41,7 +41,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
         deleteLocalFiles([imageFile]);
       });
     } catch (err) {
-      return res.status(422).send("Unable to download this file!");
+      return res.status(422).send("Unable to download this file.");
     }
   });
 >>>>>>> dev
