@@ -27,6 +27,24 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
+<<<<<<< HEAD
+||||||| 89f64f6
+      return res.status(200).sendFile(imageFile, () => {
+        deleteLocalFiles([imageFile]);
+      });
+    } catch (err) {
+      return res.status(422).send("Unable to download this file.");
+    }
+  });
+=======
+      return res.status(200).sendFile(imageFile, () => {
+        deleteLocalFiles([imageFile]);
+      });
+    } catch (err) {
+      return res.status(422).send("Unable to download this file!");
+    }
+  });
+>>>>>>> dev
   /**************************************************************************** */
 
   //! END @TODO1
