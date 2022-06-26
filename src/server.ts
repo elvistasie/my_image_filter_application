@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import { stringify } from 'querystring';
 
 (async () => {
 
@@ -28,17 +29,18 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
   
   app.get("/filteredimage", async (req: express.Request, res: express.Response) => {
+
     const {image_url} = req.query;
     
     if(!image_url) {
       return res.status(400).json({"Provide a valid image url": false});
     }
     try {
-      let imageFile = await filterImageFromURL(image_url);
-      console.log(imageFile);
+      const filteredpath = await filterImageFromURL(image_url);
+      console.log(filteredpath);
 
-      return res.status(200).sendFile(imageFile, () => {
-        deleteLocalFiles([imageFile]);
+      return res.status(200).sendFile(filteredpath, () => {
+        deleteLocalFiles([filteredpath]);
       });
     } catch (err) {
       return res.status(422).send("Unable to download this file!");
